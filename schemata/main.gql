@@ -1,0 +1,13 @@
+directive @authorize(scopes: [AuthorizationScope!]!) on FIELD_DEFINITION
+
+enum AuthorizationScope {
+  QUERY_USER
+}
+
+type User {
+  name: String!
+}
+
+extend type Query {
+  user(name: String): User @authorize(scopes: [QUERY_USER])
+}

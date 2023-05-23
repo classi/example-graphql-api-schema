@@ -1,0 +1,52 @@
+{
+  "name": "@classi/example-graphql-api-schema",
+  "version": "1.0.0",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "README.md",
+    "schema-files.json",
+    "schemata/*"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "prebuild": "go run ./tools/generate-manifest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/classi/example-graphql-api-schema.git"
+  },
+  "author": "Classi, Corp.",
+  "license": "Unlicense",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "private": true,
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failComment": false
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "glob": "^8.0.3",
+    "prettier": "^2.8.3",
+    "semantic-release": "^19.0.5",
+    "typescript": "^4.8.4"
+  }
+}

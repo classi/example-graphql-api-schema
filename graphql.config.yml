@@ -1,0 +1,4 @@
+---
+
+schema:
+  - 'schemata/**/*.gql'

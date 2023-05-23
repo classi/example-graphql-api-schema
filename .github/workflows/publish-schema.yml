@@ -1,0 +1,30 @@
+---
+
+name: publish schema
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - run: npm i
+      - run: npx prettier -c ./schemata/**/*
+      - run: npm run build
+      - run: npx semantic-release
+        if: false # disabled for example repository
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
